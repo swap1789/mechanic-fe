@@ -47,7 +47,7 @@ class Header extends Component {
 }
 
 const mapStateToProps = state => ({
-	username: state.setJWTToken.name
+	username: state.user.userDetails.name
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({

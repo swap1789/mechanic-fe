@@ -43,7 +43,7 @@ class Dashboard extends Component {
 }
 
 const mapStateToProps = state => ({
-	userId: state.setJWTToken.id,
-	token: state.setJWTToken.token
+	userId: state.user.userDetails.id,
+	token: state.user.userDetails.token
 });
 export default connect(mapStateToProps)(Dashboard);
