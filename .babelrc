@@ -1,0 +1,16 @@
+{
+	"presets": [
+		"react",
+		[
+			"env",
+			{
+				"tagets": {
+					"browsers": "last 2 versions"
+				},
+				"loose": true,
+				"modules": false
+			}
+		]
+	],
+	"plugins": ["react-hot-loader/babel", "transform-class-properties", "transform-object-rest-spread"]
+}

@@ -1,0 +1,8 @@
+{
+	"editor.formatOnSave": true,
+	"prettier.useTabs": true,
+	"prettier.tabWidth": 2,
+	"prettier.bracketSpacing": false,
+	"javascript.validate.enable": false,
+	"flow.useNPMPackagedFlow": true
+}
