@@ -1,25 +1,19 @@
-// import React from "react";
-// import {connect} from "react-redux";
-// import {bool, node} from "prop-types";
-// // type Props = {
-// // 	isLogged: Boolean,
-// // 	component: *
-// // };
+// @flow
+import React from "react";
+import {Route, Redirect} from "react-router-dom";
+import {connect} from "react-redux";
 
-// const PrivateRoute = ({component}) => (
-// 	<Route // eslint-disable-line
-// 		render={props => (props.isLogged ? <component {...props} /> : <Redirect to="/login" />) // eslint-disable-line
-// 		}
-// 	/>
-// );
+type Props = {
+	isLogged: Boolean,
+	component: *
+};
 
-// PrivateRoute.propTypes = {
-// 	isLogged: bool.isRequired,
-// 	component: node.isRequired
-// };
+const PrivateRoute = ({component: Component, isLogged}: Props) => (
+	<Route render={() => (isLogged ? <Component /> : <Redirect to="/login" />)} />
+);
 
-// const mapPropsToState = state => ({
-// 	isLogged: state.setJWTToken.isLoggedIn
-// });
+const mapPropsToState = state => ({
+	isLogged: state.user.userDetails.isLoggedIn
+});
 
-// export default connect(mapPropsToState)(PrivateRoute);
+export default connect(mapPropsToState)(PrivateRoute);

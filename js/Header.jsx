@@ -17,6 +17,9 @@ background-color: #20a0ff;
 color: #fff;
 	button {
 		color: #fff;
+		&:hover {
+			color: #ffffff;
+		}
 	}
 `;
 class Header extends Component {

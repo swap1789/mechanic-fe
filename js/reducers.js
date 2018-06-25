@@ -11,7 +11,7 @@ const InitialState = {
 		isLoggedIn: false
 	}
 };
-const user = (state = InitialState.userDetails, action: Action) => {
+const user = (state = InitialState, action: Action) => {
 	if (action.type === SET_USER_TOKEN) {
 		return {
 			...state,
@@ -26,7 +26,7 @@ const user = (state = InitialState.userDetails, action: Action) => {
 	return state;
 };
 
-const loggedOut = (state = InitialState.userDetails, action: Action) => {
+const loggedOut = (state = InitialState, action: Action) => {
 	if (action.type === USER_LOGGED_OUT) {
 		return {
 			...state,

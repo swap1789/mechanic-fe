@@ -2,6 +2,7 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
 import type {RouterHistory} from "react-router-dom";
+import {withRouter} from "react-router-dom";
 import Header from "./Header";
 import {serviceConfig} from "./handleServiceCalls";
 
@@ -46,4 +47,4 @@ const mapStateToProps = state => ({
 	userId: state.user.userDetails.id,
 	token: state.user.userDetails.token
 });
-export default connect(mapStateToProps)(Dashboard);
+export default withRouter(connect(mapStateToProps)(Dashboard));
