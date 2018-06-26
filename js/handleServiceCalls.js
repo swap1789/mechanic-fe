@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseURL = "https://mechanicnodeapi.herokuapp.com/";
+const baseURL = "https://mechanicnodeapi.herokuapp.com/"; // todo : store it in node env
 // const baseURL = "http://localhost:3000/";
 export function serviceConfig(type, endpoint, payload, id, token) {
 	const config = {
