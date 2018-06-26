@@ -1,5 +1,7 @@
 // @flow
-import {SET_USER_TOKEN, USER_LOGGED_OUT} from "./actions";
+import {SET_USER_TOKEN, USER_LOGGED_OUT, SAVE_JOB_DATA} from "./actions";
+
+import {serviceConfig} from "./handleServiceCalls";
 
 export function setJWTToken(payload: {}) {
 	return {
@@ -15,4 +17,17 @@ export function logoutUser(payload: {}) {
 	};
 }
 
-export const test = "test";
+export function saveJobDetails(data: jobData) {
+	return {
+		type: SAVE_JOB_DATA,
+		payload: data
+	};
+}
+
+export function getJobData(userId: string, token: string) {
+	return (dispatch: Function) => {
+		serviceConfig("get", "api/jobs", {}, userId, token).then((response: jobData) => {
+			dispatch(saveJobDetails(response));
+		});
+	};
+}

@@ -1,9 +1,9 @@
 // @flow
 
 import {combineReducers} from "redux";
-import {SET_USER_TOKEN, USER_LOGGED_OUT} from "./actions";
+import {SET_USER_TOKEN, USER_LOGGED_OUT, SAVE_JOB_DATA} from "./actions";
 
-const InitialState = {
+const InitialUserState = {
 	userDetails: {
 		token: "",
 		name: "",
@@ -11,7 +11,11 @@ const InitialState = {
 		isLoggedIn: false
 	}
 };
-const user = (state = InitialState, action: Action) => {
+
+const InitialJobState = {
+	jobData: {}
+};
+const user = (state = InitialUserState, action: Action) => {
 	if (action.type === SET_USER_TOKEN) {
 		return {
 			...state,
@@ -23,10 +27,6 @@ const user = (state = InitialState, action: Action) => {
 			}
 		}; // set the user name and JWT token in the store
 	}
-	return state;
-};
-
-const loggedOut = (state = InitialState, action: Action) => {
 	if (action.type === USER_LOGGED_OUT) {
 		return {
 			...state,
@@ -41,6 +41,16 @@ const loggedOut = (state = InitialState, action: Action) => {
 	return state;
 };
 
-const rootReducer = combineReducers({user, loggedOut});
+const jobDetails = (state = InitialJobState, action) => {
+	if (action.type === SAVE_JOB_DATA) {
+		return {
+			...state,
+			jobData: Object.assign({}, action.payload)
+		};
+	}
+	return state;
+};
+
+const rootReducer = combineReducers({user, jobDetails});
 
 export default rootReducer;

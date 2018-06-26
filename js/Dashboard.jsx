@@ -4,25 +4,21 @@ import {connect} from "react-redux";
 import type {RouterHistory} from "react-router-dom";
 import {withRouter} from "react-router-dom";
 import Header from "./Header";
-import {serviceConfig} from "./handleServiceCalls";
+import {getJobData} from "./actionCreators";
 
 class Dashboard extends Component {
-	state = {
-		data: {}
-	};
-
 	componentDidMount = () => {
-		serviceConfig("get", "api/jobs", {}, this.props.userId, this.props.token).then(response => {
-			this.setState({
-				data: response
-			});
-		});
+		if (!Object.keys(this.props.jobsData).length) {
+			this.props.getJobDetails(this.props.userId, this.props.token);
+		}
 	};
 
 	props: {
 		history: RouterHistory,
 		userId: string,
-		token: string
+		token: string,
+		getJobDetails: Function,
+		jobsData: jobData
 	};
 
 	logout = () => {
@@ -35,7 +31,7 @@ class Dashboard extends Component {
 				<Header logoutUser={this.logout} />
 				<pre>
 					<code>
-						{JSON.stringify(this.state.data, null, 4)}
+						{JSON.stringify(this.props.jobsData, null, 4)}
 					</code>
 				</pre>
 			</div>
@@ -45,6 +41,13 @@ class Dashboard extends Component {
 
 const mapStateToProps = state => ({
 	userId: state.user.userDetails.id,
-	token: state.user.userDetails.token
+	token: state.user.userDetails.token,
+	jobsData: state.jobDetails.jobData
 });
-export default withRouter(connect(mapStateToProps)(Dashboard));
+
+const mapDispatchToProps = (dispatch: Function) => ({
+	getJobDetails(userId, tokenNo) {
+		dispatch(getJobData(userId, tokenNo));
+	}
+});
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Dashboard));
